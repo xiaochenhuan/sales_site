@@ -1,0 +1,73 @@
+<!-- templates/sales/login.html -->
+{% extends 'sales/base.html' %}
+{% load widget_tweaks %}
+{% block title %}Login – EuroShop{% endblock %}
+{% block content %}
+<div class="form-container">
+  <h2 class="form-title text-center">Welcome Back</h2>
+
+  <form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <!-- Username field with icon -->
+    <div class="mb-4">
+      <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="fas fa-user"></i>
+        </span>
+        {{ form.username|add_class:"form-control" }}
+      </div>
+      {{ form.username.errors }}
+    </div> <!-- closes mb-4 --> <!-- :contentReference[oaicite:1]{index=1} -->
+
+    <!-- Password field with icon -->
+    <div class="mb-4">
+      <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="fas fa-lock"></i>
+        </span>
+        {{ form.password|add_class:"form-control" }}
+      </div>
+      {{ form.password.errors }}
+    </div> <!-- closes mb-4 --> <!-- :contentReference[oaicite:2]{index=2} -->
+
+    <button type="submit" class="btn btn-primary w-100 py-2">
+      <i class="fas fa-sign-in-alt me-2"></i>Continue
+    </button>
+
+    <div class="text-center mt-3">
+      <a href="#" class="form-link">Forgot Password?</a>
+    </div>
+  </form>
+
+  <!-- Divider -->
+  <div class="position-relative my-4">
+    <hr>
+    <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
+      Or continue with
+    </span>
+  </div>
+
+  <!-- Social buttons -->
+  <div class="row g-2">
+    <div class="col">
+      <button class="btn btn-outline-secondary w-100">
+        <i class="fab fa-google me-2"></i>Google
+      </button>
+    </div>
+    <div class="col">
+      <button class="btn btn-outline-secondary w-100">
+        <i class="fab fa-facebook me-2"></i>Facebook
+      </button>
+    </div>
+  </div>
+
+  <p class="text-center mt-4 mb-0">
+    New to EuroShop?
+    <a href="{% url 'register' %}" class="form-link">Create an account</a>
+  </p>
+</div>
+{% endblock %}

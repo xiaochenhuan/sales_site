@@ -1,0 +1,180 @@
+<!-- templates/sales/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}EuroShop{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2d3e50;      /* Deep Navy */
+      --secondary: #27ae60;    /* Sophisticated Green */
+      --accent: #e67e22;       /* Warm Orange */
+      --light: #f8f9fa;
+      --dark: #2c3e50;
+    }
+
+    body {
+      background-color: var(--light);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+    }
+
+    .navbar {
+      border-bottom: 2px solid rgba(44, 62, 80, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--primary) !important;
+      font-size: 1.5rem;
+    }
+
+    .form-container {
+      max-width: 440px;
+      margin: 4rem auto;
+      padding: 2.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .form-container:hover {
+      transform: translateY(-2px);
+    }
+
+    .form-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      font-size: 1.75rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .form-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: var(--secondary);
+    }
+
+    .form-control {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: #1a2633;
+      transform: translateY(-1px);
+    }
+
+    .btn-success {
+      background: var(--secondary);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .alert {
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .form-link {
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .form-link:hover {
+      color: var(--secondary);
+    }
+
+    .input-icon {
+      position: relative;
+    }
+
+    .input-icon i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #95a5a6;
+    }
+
+    @media (max-width: 576px) {
+      .form-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <i class="fas fa-shopping-bag me-2"></i>EuroShop
+      </a>
+      <div class="d-flex align-items-center">
+        {% if user.is_authenticated %}
+          <span class="text-muted me-3 fw-500">Welcome, {{ user.username }}</span>
+          <a class="btn btn-outline-secondary btn-sm px-3" href="{% url 'logout' %}">
+            <i class="fas fa-sign-out-alt me-2"></i>Logout
+          </a>
+        {% else %}
+          <a class="btn btn-primary btn-sm me-2 px-3" href="{% url 'login' %}">
+            <i class="fas fa-sign-in-alt me-2"></i>Login
+          </a>
+          <a class="btn btn-success btn-sm px-3" href="{% url 'register' %}">
+            <i class="fas fa-user-plus me-2"></i>Register
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% if messages %}
+      {% for msg in messages %}
+        <div class="alert alert-{{ msg.tags }} mt-4 alert-dismissible fade show">
+          {{ msg }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

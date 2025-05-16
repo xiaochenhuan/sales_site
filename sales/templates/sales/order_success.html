@@ -1,0 +1,9 @@
+{% extends 'sales/base.html' %}
+{% block title %}Order Confirmation – EuroShop{% endblock %}
+{% block content %}
+<div class="form-container text-center">
+  <h4 class="mb-4">Thank you for your order!</h4>
+  <p>You successfully purchased <strong>{{ product.name }}</strong> for €{{ product.price }}.</p>
+  <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+</div>
+{% endblock %}

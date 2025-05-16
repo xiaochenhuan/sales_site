@@ -1,0 +1,76 @@
+{% extends 'sales/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="form-container">
+  <h2 class="form-title text-center">Join EuroShop</h2>
+  <form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <!-- Username field -->
+    <div class="mb-4">
+      {{ form.username.label_tag }}
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+        {{ form.username|add_class:"form-control"|attr:"placeholder:Username" }}
+      </div>
+      {{ form.username.errors }}
+    </div>
+
+    <!-- Email field -->
+    <div class="mb-4">
+      {{ form.email.label_tag }}
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+        {{ form.email|add_class:"form-control"|attr:"placeholder:Email address" }}
+      </div>
+      {{ form.email.errors }}
+    </div>
+
+    <!-- Password field -->
+    <div class="mb-4">
+      {{ form.password.label_tag }}
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+        {{ form.password|add_class:"form-control"|attr:"placeholder:Password" }}
+      </div>
+      {{ form.password.errors }}
+    </div>
+
+    <!-- Password confirmation field -->
+    <div class="mb-4">
+      {{ form.password2.label_tag }}
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-check-circle"></i></span>
+        {{ form.password2|add_class:"form-control"|attr:"placeholder:Confirm password" }}
+      </div>
+      {{ form.password2.errors }}
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 py-2">
+      <i class="fas fa-user-plus me-2"></i>Create Account
+    </button>
+
+    <div class="form-check mt-4">
+      <input class="form-check-input" type="checkbox" required id="tosCheck">
+      <label class="form-check-label small text-muted" for="tosCheck">
+        I agree to the <a href="#" class="form-link">Terms of Service</a> and
+        <a href="#" class="form-link">Privacy Policy</a>
+      </label>
+    </div>
+  </form>
+
+  <div class="position-relative mt-4">
+    <hr>
+    <div class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
+      Already a member?
+    </div>
+  </div>
+
+  <p class="text-center mt-4 mb-0">
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary w-100">
+      <i class="fas fa-sign-in-alt me-2"></i>Sign In
+    </a>
+  </p>
+</div>
+{% endblock %}
